@@ -23,10 +23,10 @@ With few data manipulation steps, we can track the reviews has been given by a c
 
 |  | review_id| order_id | customer_unique_id | review_score | review_answer_timestamp |
 |-------|--------|---------|---------|---------|---------|
-| 0 | 13359... | e22ac... | 00003... | 5 | 2018-05-21 13:44:48 |
-| 1 | e383e... | 3594e... | 0000b... | 4 | 2018-05-11 22:29:25 |
-| 2 | d89cb... | b33ec... |	0000f... | 3 | 2017-04-07 01:19:44 |
-| 3 | 6f22e... | 41272... | 0000f... | 4 | 2017-11-03 00:17:51 |
+| 0 | 13359... | e22ac... | 000036... | 5 | 2018-05-21 13:44:48 |
+| 1 | e383e... | 3594e... | 0000b8... | 4 | 2018-05-11 22:29:25 |
+| 2 | d89cb... | b33ec... |	0000f4... | 3 | 2017-04-07 01:19:44 |
+| 3 | 6f22e... | 41272... | 0000f6... | 4 | 2017-11-03 00:17:51 |
 
 Based on the dataset description, each customer was sent a survey after finishing a particular transaction which could be filled by rating and review description. Ratings are in 1-to-5 range.
 
@@ -38,10 +38,10 @@ We'll just simplify the previous table to something looked like this.
 
 |    | customer_unique_id |   nth_review |   review_score |
 |---:|:---------------------------------|-------------:|---------------:|
-|  0 | 00003... |            1 |              5 |
-|  1 | 0000b... |            1 |              4 |
-|  2 | 0000f... |            1 |              3 |
-|  3 | 0000f... |            1 |              4 |
+|  0 | 000036... |            1 |              5 |
+|  1 | 0000b8... |            1 |              4 |
+|  2 | 0000f4... |            1 |              3 |
+|  3 | 0000f6... |            1 |              4 |
 
 Now we can see the order of each review given by every customer. 
 
