@@ -97,7 +97,7 @@ Some interesting notes from this graph.
     <li>Customers have about 25 - 30% probability of giving 5-star rating given they gave any rating beside 5-star</li>
 </ul>
 
-And one more cool stuff. With the same transition matrix, we can do a matrix operation defined as
+And one more cool stuff. With the same transition matrix, we can do a matrix exponentiation defined as
 
 $$ {P^{(k)}_t} = \begin{pmatrix}\mathbb{P}(X_{t+k} = 1 | X_t = 1) & \mathbb{P}(X_{t+k} = 2 | X_t = 1) & \cdots & \mathbb{P}(X_{t+k} = n | X_t = 1)\\\ \mathbb{P}(X_{t+k} = 1 | X_t = 1) & \mathbb{P}(X_{t+k} = 2 | X_t = 1) & \cdots & \mathbb{P}(X_{t+k} = n | X_t = 1)\\\ \vdots & \vdots & \ddots & \vdots\\\ \mathbb{P}(X_{t+k} = 1 | X_t = n) & \mathbb{P}(X_{t+k} = 2 | X_t = n) & \cdots & \mathbb{P}(X_{t+k} = n | X_t = n)\end{pmatrix}$$
 
