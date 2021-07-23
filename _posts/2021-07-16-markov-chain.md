@@ -8,7 +8,7 @@ In retail and e-commerce industries, customers can share their experiences after
 
 A review does not only describe the product, the service, and the transaction experience, but also the behaviour of the customer him/herself. Getting know about customers would be a good step to know their painpoints and whether those affect their behaviour. 
 
-<p style="text-align:center"><img src="{{ site.baseurl }}/assets/images/bananas.jpg" alt="bananas" width="500"/></p>
+<p style="text-align:center"><img src="{{ site.baseurl }}/assets/images/2021-07-16-markov-chain/bananas.jpg" alt="bananas" width="500"/></p>
 <h6 style="text-align:center">Source: bbcgoodfood.com</h6>
 
 Consider the most prominent aspect of a review: rating (e.g. rating that describes how satisfied you are in a 1-to-5 star range). In terms of writing reviews, there are some behaviours that can be empirically expected from customers. If a seller offers a certainly bad product or service then someone buys his product and gives bad review, the upcoming reviews tend to be similar. 
