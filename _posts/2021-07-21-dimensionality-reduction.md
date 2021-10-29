@@ -31,7 +31,7 @@ Well, what could have gone wrong here?
 
 <p style="text-align:center"><img src="{{ site.baseurl }}/assets/images/2021-07-21-dimensionality-reduction/pca-meme.jpg" alt="pca-meme" width="300"/></p>
 
-When we apply PCA to our training set, most likely we do not include our label as a consideration. Simply put, if you're using `PCA` class in `scikit-learn`, you don't `fit()` the model into your label together with the features. Well, it is an unsupervised learning technique. Only the features will be mapped from, let's say, $$X$$ features to $$Z$$ principal components. The label is ignored by the algorithm. 
+When we apply PCA to our training set, most likely we do not include our label as a consideration. Simply put, if you're using `PCA` class in `scikit-learn`, you don't `fit()` the model into your label together with the features. Well, it is an unsupervised learning technique. Only the features will be mapped from, say, $$X$$ features to $$Z$$ principal components. The label is ignored by the algorithm. 
 
 As the result, our dimensionality reduction algorithm doesn't know any relationship between our features and our label in the training set. It didn't find these principal components based on your label. They were based on how the projected axes will maximize the variance retained from our original dataset. 
 
