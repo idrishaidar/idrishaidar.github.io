@@ -125,5 +125,3 @@ With these such simple assumptions and also data preparation, it turns out that 
 <h6 style="text-align:center">Source: tenor.com</h6>
 
 If you find this model interesting, there's a <a href="https://youtu.be/TuTmC8aOQJE?t=1944">very cool lecture</a> from MIT OpenCourseWare which talked about Stochastic Processes (skip to 32:24 for the Markov chain explanation). You can also read this <a href="https://brilliant.org/wiki/markov-chains/">article</a> from Brilliant to get a little bit of initial exposure on this model. If you prefer an interative one, see this <a href="https://setosa.io/blog/2014/07/26/markov-chains/index.html">blog post</a> by Victor Powell and you can play with some Markov chain visualization. 
-
-Coming soon: full code explanation.

@@ -1,5 +1,5 @@
 ---
-title: "[WIP] How long should you wait until a customer's second purchase?"
+title: "How long should you wait until a customer's second purchase?"
 layout: post
 mathjax: true
 ---
@@ -10,7 +10,10 @@ Acquiring new customers might cost higher than making the existing ones to purch
 
 Given a customer has made a purchase once, for example, how long one should wait for him/her to make the second one. By estimating when the second purchase will be made, it might be easier to measure how challenging it is to expect more purchase from someone.
 
-Let's simulate this question with a Survival Analysis.
+<p style="text-align:center"><img src="{{ site.baseurl }}/assets/images/2021-10-23-survival-analysis/waits-faster-meme.jpg" alt="waits-faster-meme" width="350"/></p>
+<h6 style="text-align:center">Source: starecat.com</h6>
+
+Let's simulate this question with a *Survival Analysis*.
 
 Survival analysis was usually done to estimate lifespans of individuals (e.g. in medical prognosis). We define an event as "death", which we want to anticipate the time of its happening at someone's life. We'd like to measure how long someone will "survive" since "birth" until meeting his/her "death". 
 
@@ -31,7 +34,7 @@ For our current context, we define
 
 Let's observe the lifetimes of some customers.
 
-<p style="text-align:center"><img src="{{ site.baseurl }}/assets/images/2021-10-23-survival-analysis/lifespan.png" alt="lifespan" width="700"/></p>
+<p style="text-align:center"><img src="{{ site.baseurl }}/assets/images/2021-10-23-survival-analysis/lifespan.png" alt="lifespan" width="650"/></p>
 
 The plot above simply shows the time difference between someone's first and second purchase. With the dotted line at $$t = 100$$, it means we're observing their "lifespan" until the 100th day after the first purchase. 
 
@@ -69,7 +72,7 @@ $$S(t)= \prod_{i=0}^{t}1-\frac{d_i}{n_i}$$
 
 Now, it's just a matter of multiplying a bunch of fractions.
 
-We will use Kaplan-Meier estimator to see how many percent of customers who still haven't made their second purchase until time $$t$$. With the help of `lifelines`, we just need the observed "lifespan" of each customers and whether second purchase was occured at the end of their "lifespan" to get our survival function. 
+We will use Kaplan-Meier estimator to see how many percent of customers who still haven't made their second purchase until time $$t$$. With the help of <a href="https://lifelines.readthedocs.io/en/latest/Survival%20Analysis%20intro.html"><b>`lifelines`</b></a>, we just need the observed "lifespan" of each customers and whether second purchase was occured at the end of their "lifespan" to get our survival function. 
 
 |    |   Lifespan |   Death |
 |---:|-----------:|--------:|
@@ -79,14 +82,12 @@ We will use Kaplan-Meier estimator to see how many percent of customers who stil
 |  3 |         84 |       1 |
 |  4 |        253 |       1 |
 |  5 |        215 |       0 |
-|  6 |         18 |       1 |
-|  7 |          8 |       1 |
 
 Note that since the time when a customer made their first purchase is varied, the "lifespan" of customers who haven't made their second purchase until the end of observation can also be varied, although here we assume the end of our observation is fixed, which the last purchase date.
 
 Here's the plot based on our estimated survival function.
 
-(survival plot)
+<p style="text-align:center"><img src="{{ site.baseurl }}/assets/images/2021-10-23-survival-analysis/survival-plot.png" alt="survival-plot" width="625"/></p>
 
 The percentage on y-axis can be seen as the probability of someone not making his/her second purchase yet until time $$t$$. 
 
@@ -100,7 +101,32 @@ Depending on what kind of business our data are based on, 22 days or 99 days can
 
 We talked mostly about "survival rate", while our main focus is on the "death" event instead. Now, we'll shift our question to "what is the probability of someone making his/her second purchase at time $$t$$". We can model the probabilities with another function called hazard function. 
 
-Hazard function represents the probabilty of death at certain time $$t$$. 
+Hazard function $$\lambda(t)$$ represents the probabilty of death at certain time $$t$$ given surviving up to time $$t$$.
 
+$$\lambda(t) = Pr(T=t|T \geq t)$$
 
+If you're already have your survival function $$S(t)$$, you can get your $$\lambda(t)$$ by deriving $$S(t)$$, since $$S(t)$$ is just like the sum of some $$\lambda(t)$$
 
+$$S(t) = exp(-\int_{0}^{t}\lambda(i)di)$$
+
+$$\lambda(t) = -\frac{S'(t)}{S(t)}$$
+
+But since our survival function was rather estimated with Kaplan-Meier estimator, the derivation doesn't work quite well. We instead will use another estimator. Initially, this estimator produces a cumulative hazard function $$\Lambda(t)$$, but soon we will be able to get our $$\lambda(t)$$. 
+
+$$\Lambda(t) = \int_{0}^{t}\lambda(i)di$$
+
+The notation above will be estimated into a simpler form by something called Nelson-Aelen estimator.
+
+$$H(t) = \sum_{i=0}^{t}\frac{d_i}{n_i}$$
+
+So here is our cumulative hazard function plot.
+
+<p style="text-align:center"><img src="{{ site.baseurl }}/assets/images/2021-10-23-survival-analysis/cumulative-hazard-function.png" alt="cumulative-hazard-function" width="625"/></p>
+
+It seems the interpretation would not be too straightforward since now the y-label shows cumulative probabilities of second purchase at $$t$$ instead of just probabilities. But at least there are some takeaways. The cumulative hazard increase rate looks quite consistent along the timeline.
+
+What if we just want to observe the probability? Well, we can now plot the hazard function.
+
+<p style="text-align:center"><img src="{{ site.baseurl }}/assets/images/2021-10-23-survival-analysis/hazard-function.png" alt="hazard-function" width="625"/></p>
+
+Cosmetically, the line is more jagged than the previous one. But at least interpreting one number can be more obvious. 
