@@ -30,21 +30,23 @@ For our current context, we define
 - "death" as the event that a customer made his/her second purchase
 - "lifespan" as the time difference between "birth" and "death" (or how long should we wait for a customer to make his/her second purchase).
 
+We are using <a href="https://archive.ics.uci.edu/ml/datasets/online+retail">this</a> online retail dataset that contains real transactions of gift products business in 2010 and 2011.
+
 ## Lifetime Plot 
 
 Let's observe the lifetimes of some customers.
 
 <p style="text-align:center"><img src="{{ site.baseurl }}/assets/images/2021-10-23-survival-analysis/lifespan.png" alt="lifespan" width="650"/></p>
 
-The plot above simply shows the time difference between someone's first and second purchase. With the dotted line at $$t = 100$$, it means we're observing their "lifespan" until the 100th day after the first purchase. 
+The plot above simply shows the time difference between someone's first and second purchase. The dotted line at $$t = 100$$ means we're observing their "lifespan" until the 100th day after the first purchase. Like, how often we see a customer who made his/her second purchase in 100 days after his/her first one.
 
-Red line means their second purchases are observed before or at the 100th day after the first purchase. Blue line means their second purchases haven't observed yet until the 100th day after the first purchase. Consequently, their second purchase could be happening at the 101st day or 105th day after the first purchase, or *not happening at all*. 
+Red line means their second purchases are observed at the 100th day after the first purchase or earlier. Blue line means their second purchases haven't observed yet in 100 days after the first purchase, implying their second purchase could be happening at the 101st day or 105th day after the first purchase, or *not happening at all*. 
 
-See also that some blue lines can be not too long, but some can be very long beyond the right border of the plot (the upper limit of the x-axis is adjusted on purpose to simplify the plot). We're calling these blue lifetimes as *right-censored*. 
+Note that some blue lines can be not too long, but some can be very long beyond the right border of the plot (the upper limit of the x-axis is adjusted on purpose to simplify the plot). We're calling these blue lifetimes as *right-censored*. 
 
-Why the right-censored data are matter to notice? If we'd like to take the average "lifespan" of our customers when we're observing them at time $$t$$, the average can be underestimated since some customers' second purchase aren't observed yet (i.e. we don't know yet whether they will make second purchase beyond at time $$t$$). In other words, having observed their actual lifetimes beyond time $$t$$ can't be useful in this case.
+Why are the right-censored data matter to notice? If we'd like to take the average "lifespan" of our customers when we're observing them at time $$t$$, the average can be underestimated by the lifespan of customers whose second purchase aren't observed yet. We don't know yet whether they will make second purchase beyond at time $$t$$. In other words, having observed their actual lifetimes beyond time $$t$$ can't be useful in this case.
 
-In survival analysis, we want to get a better general estimation of waiting time between a customer's first and second purchase.
+In survival analysis, we want to get a better estimation of waiting time between a customer's first and second purchase.
 
 ## Survival Function
 
@@ -91,11 +93,12 @@ Here's the plot based on our estimated survival function.
 
 The percentage on y-axis can be seen as the probability of someone not making his/her second purchase yet until time $$t$$. 
 
-Some cool insights:
-- Around 80% of customers haven't made their second purchase until the 22nd day after their purchase. 
-- Around half of customers haven't made their second purchase until the 99th day after their purchase, which is around three months. 
+What do we get here?
+- Around 80% of customers haven't made their second purchase until the 26th day after their first purchase. 
+- Around half of customers haven't made their second purchase until the 99th day after their first purchase, which is around three months.
+- Around 67% of customers have made their seceond purchase up to 180th day or six months after their first purchase. 
 
-Depending on what kind of business our data are based on, 22 days or 99 days can be relatively short or long (e.g. for corporate retail business, 22 days could be considered as short waiting time, but for consumer retail, it could be too long), they can be our estimation on when is the ideal time to re-engage the customers in order to increase their chance to purchase again.
+Depending on what kind of business our data are based on, 27 days or 99 days can be relatively short or long (e.g. for corporate retail business, 27 days could be considered as short waiting time, but for consumer retail, it could be too long), they can be our estimation on when is the ideal time to re-engage the customers in order to increase their chance to purchase again.
 
 ## Hazard Function
 
@@ -123,10 +126,14 @@ So here is our cumulative hazard function plot.
 
 <p style="text-align:center"><img src="{{ site.baseurl }}/assets/images/2021-10-23-survival-analysis/cumulative-hazard-function.png" alt="cumulative-hazard-function" width="625"/></p>
 
-It seems the interpretation would not be too straightforward since now the y-label shows cumulative probabilities of second purchase at $$t$$ instead of just probabilities. But at least there are some takeaways. The cumulative hazard increase rate looks quite consistent along the timeline.
+It seems the interpretation would not be too straightforward since now the y-label shows cumulative probabilities of second purchase at $$t$$ instead of just probabilities. But at least there are some takeaways. The cumulative hazard increase rate looks quite consistent along the timeline. No interesting sudden rate change at any point $$t$$, except in the beginning and the end. Other cumulative hazard functions can have sudden changes in some certain period.
 
 What if we just want to observe the probability? Well, we can now plot the hazard function.
 
 <p style="text-align:center"><img src="{{ site.baseurl }}/assets/images/2021-10-23-survival-analysis/hazard-function.png" alt="hazard-function" width="625"/></p>
 
-Cosmetically, the line is more jagged than the previous one. But at least interpreting one number can be more obvious. 
+Note that since we're not deriving the hazard function from our survival function, the hazard function above is *estimated* from the change rates happened in the cumulative hazard function. Appearantly, the line is more jagged. We see that the probability of second purchase is quite flat along the timeline, but there are notable spikes in the beginning and the end of the timeline, just like we've seen on the cumulative hazard plot. While the y-label is more obvious to interpret than the cumulative hazard function, it seems that we won't need to observe hazard rate at a certain $$t$$ that often. Thus, cumulative hazard function is said to be more recommended.
+
+Based on some findings above, looks like we need to give customers more time to deciding on making second purchase. Since our data are based on gift product retail transactions, judging from the product type seems reasonable to expect a customer to not having another purchase at a very short time. Though hopefully we see more interesting survival and hazard function in another problem.
+
+Should you find survival analysis is exciting, have more sneak peek in this <a href="https://www.coursera.org/learn/ai-for-medical-prognosis">course</a>.
