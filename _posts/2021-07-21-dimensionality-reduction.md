@@ -15,6 +15,9 @@ Let's talk about Principal Component Analysis (PCA) as a matter of problem frami
 
 While implementing PCA, you suddenly recall about how reducing features from $$n$$ to $$k$$ features could simplify the model and help avoiding overfitting. You also wonder how PCA could help you find the so-called "most important features" to predict your label. You then proceed your PCA implementation and finally obtain the principal components.
 
+
+
+
 With something you reflected about a while ago, you then re-train your model with the PCA-reduced dataset. You get an idea to come up with this comparison (just for an illustration).
 
 |   | Before PCA | After PCA |

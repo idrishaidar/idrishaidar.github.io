@@ -17,6 +17,9 @@ Let's see another case. If a buyer gets a bad experience purchasing from a certa
 
 How does a previously given review affect another upcoming review by the same person?
 
+
+
+
 Given a bunch of users' transaction historical data, we can extract review history from each customer. As a dummy example, we're using a <a href="https://www.kaggle.com/olistbr/brazilian-ecommerce">public dataset</a> which contains orders made at a Brazilian e-commerce. 
 
 With few data manipulation steps, we can track the reviews has been given by a customer. 

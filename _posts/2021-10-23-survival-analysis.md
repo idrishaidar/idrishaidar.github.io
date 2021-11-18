@@ -15,6 +15,9 @@ Given a customer has made a purchase once, for example, how long one should wait
 
 Let's simulate this question with a *Survival Analysis*.
 
+
+
+
 Survival analysis was usually done to estimate lifespans of individuals (e.g. in medical prognosis). We define an event as "death", which we want to anticipate the time of its happening at someone's life. We'd like to measure how long someone will "survive" since "birth" until meeting his/her "death". 
 
 The measurement comes in the form of probabilities, so one of the questions we can ask is, "What is the probability of surviving until the time $$t$$?" (e.g. until the $$t^{th}$$ day after "birth").
