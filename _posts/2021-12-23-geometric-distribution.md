@@ -1,5 +1,5 @@
 ---
-title: "[WIP] Campaign acceptance rate with Geometric Distribution"
+title: "Campaign acceptance rate with Geometric Distribution"
 layout: post
 mathjax: true
 ---
@@ -13,11 +13,11 @@ From the marketer's perspective, if they send an offer to a customer and then th
 
 First, let's check how many customers accepted an offer in the $$k^{th}$$ campaign.
 
-(acceptance barplot)
+<p style="text-align:center"><img src="{{ site.baseurl }}/assets/images/2021-12-23-geometric-distribution/acceptance-barplot.png" alt="acceptance-barplot" width="650"/></p>
 
-The probability of accepting a campaign offer in a particular $$k^{th}$$ campaign is varied. But in general, the probability of accepting a campaign offer by any customer in any $$k^{th}$$ campaign is 18.49% (0.1849). It's a quite good acceptance rate, but again, it broadly tells the probability of accepting an offer, not by a particular customer or in a particular campaign. 
+The probability of accepting a campaign offer in a $$k^{th}$$ campaign is varied. But in general, the probability of accepting a campaign offer by any customer in any $$k^{th}$$ campaign is 18.49% (because the probability of the opposite is around 81.51%). It's a quite good acceptance rate, but again, it broadly tells the probability of accepting an offer, not by a particular customer or in a particular campaign. 
 
-Meanwhile in one scenario, we'd like to see the probability of accepting an offer in a particular $$n^{th}$$ campaign after knowing that the probability of acceptance in general is 18.49%. 
+Meanwhile in one scenario, we'd like to see the probability of accepting an offer in a particular $$k^{th}$$ campaign after knowing that the probability of acceptance in general is 18.49%. 
 
 We will try to model this with *Geometric Distribution*. 
 
@@ -33,7 +33,8 @@ This function will help us to find the probability of having $$k$$ rejected offe
 
 By plugging in our $$p$$ and every $$k$$ from our data, here is our distribution.
 
-(pmf plot)
+<p style="text-align:center"><img src="{{ site.baseurl }}/assets/images/2021-12-23-geometric-distribution/pmf.png" alt="pmf" width="650"/></p>
+
 
 As more trials are done, the probability of having failed campaigns of the trial number is lower. The customers are more likely to accept an offer after only offered by few campaigns.
 
@@ -49,6 +50,12 @@ The probability of success is assumed to be the same on every $$k^{th}$$ campaig
 
 Having said that, the issue here is we cannot use only single $$p$$ to represents the probability of accepted campaign. Different $$k$$ could have different $$p$$. 
 
-So what would be the alternative? Perhaps, a distribution family like Geometric but with different $$p$$ for each trial. So far, I haven't found such distribution family that is more suitable for our problem. One of my first searches on Google with keywords "geometric distribution with different probability of success for each trial" led me to this <a href="https://math.stackexchange.com/questions/435746/geometric-distribution-with-unequal-probabilities-for-trials">StackExchange page</a>, but no promising answer until now. A user did said that such distribution could exist without any specific name. 
+So what would be the alternative? Perhaps, a distribution family like Geometric but with different $$p$$ for each trial (e.g. a distribution with something like $$p_k$$ parameter). So far, I haven't found such distribution family that is more suitable for our problem. One of my first searches on Google with keywords "geometric distribution with different probability of success for each trial" led me to this <a href="https://math.stackexchange.com/questions/435746/geometric-distribution-with-unequal-probabilities-for-trials">StackExchange page</a>, but no promising answer until now. A user did said that such distribution could exist without any specific name. 
+
+Or, if we want to do a little bit of conditional probability:
+
+<p style="text-align:center"><img src="{{ site.baseurl }}/assets/images/2021-12-23-geometric-distribution/conditional-barplot.png" alt="conditional-probability" width="650"/></p>
+
+Another PMF plot? Errr nope. Actually the plot above is the same as the first one, except we don't include the probability of not accepting. The probability of each $$k$$ changes though, but no any additional insight because there isn't such case as "accepted at $$k^th$$ campaign given the customer rejects the offer".
 
 After all, it's rather counterintuitive to compute the probability of acceptance in each particular $$k^{th}$$ campaign, even after seeing the barplot above.
