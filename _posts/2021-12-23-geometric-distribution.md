@@ -6,7 +6,7 @@ mathjax: true
 
 We are running a campaign to offer a certain product to a customer. An offer obviously may not be accepted at the first trial, so each customer can be offered the same product several times up to, say, six times, or until he/she accepted the offer.
 
-From the marketer's perspective, if they send an offer to a customer and then the customer rejects it, it be counted as a "failure". So the marketer can "fail" multiple times before their offer is accepted by a customer, which will be a "success" for them.
+From the marketer's perspective, if they send an offer to a customer and then the customer rejects it, it can be counted as a "failure". So the marketer can "fail" multiple times before their offer is accepted by a customer, which will be a "success" for them.
 
 <p style="text-align:center"><img src="https://freshwatervacationrentals.com/wp-content/uploads/2020/06/fishing.jpg" alt="tesseract" width="600"/></p>
 <h6 style="text-align:center">Source: freshwatervacationrentals.com</h6>
@@ -14,7 +14,7 @@ From the marketer's perspective, if they send an offer to a customer and then th
 
 
 
-First, let's check how many customers accepted an offer in the $$k^{th}$$ campaign.
+Let's check how many customers accepted an offer in the $$k^{th}$$ campaign.
 
 <p style="text-align:center"><img src="{{ site.baseurl }}/assets/images/2021-12-23-geometric-distribution/acceptance-barplot.png" alt="acceptance-barplot" width="650"/></p>
 
@@ -24,9 +24,9 @@ Meanwhile in one scenario, we'd like to see the probability of accepting an offe
 
 We will try to model this with *Geometric Distribution*. 
 
-By approaching this problem with Geometric Distribution, we rather put interest toward the probability of having $$k$$ campaigns rejected by a customer before finally accepted. It should be the same probability as before, just in a different sentence. The difference will be on how we construct the probability distribution.
+By approaching this problem with Geometric Distribution, we rather put interest toward <b>the probability of having $$k$$ campaigns rejected by a customer before finally accepted</b>. It should be the same probability as before, just in a different sentence. The difference will be on how we construct the probability distribution.
 
-Assume for now that every campaign offer to a customer is a Bernoulli trial and the probability of accepted is the same for every trial. So the random variable will be about how many failed Bernoulli trials attempted before a success.
+Assume for now that *every campaign offer to a customer is a Bernoulli trial* and *the probability of accepted is the same for every trial*. So the random variable will be about how many failed Bernoulli trials attempted before a success.
 
 We define the probability mass function as 
 
@@ -49,11 +49,13 @@ As more trials are done, the probability of having failed campaigns of the trial
 
 But, wait. What could be wrong?
 
-The probability of success is assumed to be the same on every $$k^{th}$$ campaign, while the actual case can be different, as we saw at the very first barplot. Thus, the trials could be dependent with each other, i.e. the chance of accepting may be higher if the customer has refused the offer few times before. 
+<b>The probability of success is assumed to be the same on every $$k^{th}$$ campaign, while the actual case can be different</b>, as we saw at the very first barplot. Thus, the trials could be dependent with each other, i.e. the chance of accepting may be higher if the customer has refused the offer few times before. 
 
 Having said that, the issue here is we cannot use only single $$p$$ to represents the probability of accepted campaign. Different $$k$$ could have different $$p$$. 
 
-So what would be the alternative? Perhaps, a distribution family like Geometric but with different $$p$$ for each trial (e.g. a distribution with something like $$p_k$$ parameter). So far, I haven't found such distribution family that is more suitable for our problem. One of my first searches on Google with keywords "geometric distribution with different probability of success for each trial" led me to this <a href="https://math.stackexchange.com/questions/435746/geometric-distribution-with-unequal-probabilities-for-trials">StackExchange page</a>, but no promising answer until now. A user did said that such distribution could exist without any specific name. 
+So what would be the alternative? Perhaps, a distribution family like Geometric but with different $$p$$ for each trial (e.g. a distribution with something like $$p_k$$ parameter). So far, I haven't found such distribution family that is more suitable for our problem. 
+
+My first search on Google with keywords "geometric distribution with different probability of success for each trial" led me to this <a href="https://math.stackexchange.com/questions/435746/geometric-distribution-with-unequal-probabilities-for-trials">StackExchange page</a>, but no promising answer until now. One of the users did said that <b>such distribution could exist but without any specific name</b>. 
 
 Or, if we want to do a little bit of conditional probability:
 
