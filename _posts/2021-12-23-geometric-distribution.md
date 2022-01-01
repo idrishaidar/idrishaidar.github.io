@@ -8,7 +8,7 @@ We are running a campaign to offer a certain product to a customer. An offer obv
 
 From the marketer's perspective, if they send an offer to a customer and then the customer rejects it, it can be counted as a "failure". So the marketer can "fail" multiple times before their offer is accepted by a customer, which will be a "success" for them.
 
-<p style="text-align:center"><img src="https://freshwatervacationrentals.com/wp-content/uploads/2020/06/fishing.jpg" alt="tesseract" width="600"/></p>
+<p style="text-align:center"><img src="{{ site.baseurl }}/assets/images/2021-12-23-geometric-distribution/fishing.jpg" alt="fishing" width="650"/></p>
 <h6 style="text-align:center">Source: freshwatervacationrentals.com</h6>
 
 
